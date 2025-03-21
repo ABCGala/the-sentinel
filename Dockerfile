@@ -4,17 +4,14 @@ FROM node:20-alpine
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json (if available)
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies (including TypeScript)
 RUN npm install
 
 # Copy the rest of the application files
 COPY . .
-
-# Set environment variables (Optional: Use .env for configuration)
-ENV NODE_ENV=production
 
 # Build the TypeScript code
 RUN npm run build
@@ -23,4 +20,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Run the bot
-CMD ["npm", "start"]
+CMD ["node", "dist/bot_main.js"]

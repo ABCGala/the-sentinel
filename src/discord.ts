@@ -1,5 +1,5 @@
 import axios from "axios"; // Ensure axios is properly imported
-import { DISCORD_WEBHOOK_URL } from "./config"; // Import webhook URL
+import { DISCORD_WEBHOOK_URL } from "./config.js"; // Import webhook URL
 
 /**
  * Sends a message to Discord webhook

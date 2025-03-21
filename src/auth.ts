@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_URL, WALLET_ADDRESS, PRIVATE_KEY } from "./config";
-import { signObject } from "./utils";
+import { API_URL, WALLET_ADDRESS, PRIVATE_KEY } from "./config.js";
+import { signObject } from "./utils.js";
 
 /**
  * Checks if the user is registered on GalaChain.

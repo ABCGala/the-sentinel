@@ -1,5 +1,5 @@
-import { getBalance, transferTokens } from "./api";
-import { RECIPIENTS, MIN_BALANCE, CHECK_INTERVAL } from "./config";
+import { getBalance, transferTokens } from "./api.js";
+import { RECIPIENTS, MIN_BALANCE, CHECK_INTERVAL } from "./config.js";
 import { sendDiscordNotification } from "./discord.js";
 
 let consecutiveFailures = 0;

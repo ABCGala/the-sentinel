@@ -1,5 +1,5 @@
-import "./tick_loop";
-import { sendDiscordNotification } from "./discord";
+import "./tick_loop.js";
+import { sendDiscordNotification } from "./discord.js";
 
 console.log("🔄 Gala Auto-Transfer Bot is running...");
 sendDiscordNotification("🚀 **Gala Auto-Transfer Bot is now running!** ✅").catch(error => {

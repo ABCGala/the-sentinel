@@ -1,12 +1,8 @@
 import axios from "axios";
-import { signObject, generateUniqueKey } from "./utils";
-import { WALLET_ADDRESS, PRIVATE_KEY, PUBLIC_KEY, API_URL } from "./config";
-import { FetchBalancesResponse, TokenBalance } from "./types";
-import {
-  sendHighBalanceAlert,
-  sendTransferSuccessNotification,
-  sendTransferFailureNotification,
-} from "./discord"; 
+import { signObject, generateUniqueKey } from "./utils.js";
+import { WALLET_ADDRESS, PRIVATE_KEY, PUBLIC_KEY, API_URL } from "./config.js";
+import { FetchBalancesResponse, TokenBalance } from "./types.js";
+import { sendHighBalanceAlert, sendTransferSuccessNotification, sendTransferFailureNotification } from "./discord.js";
 
 /**
  * Fetches the GALA balance from GalaChain.
