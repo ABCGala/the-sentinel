@@ -26,7 +26,7 @@ Ensure you have the following installed:
 
 ```sh
 # Clone the repository
-git clone https://github.com/your-github-username/gala-auto-transfer-bot.git
+git clone https://github.com/ABCGala/gala-auto-transfer-bot.git
 cd gala-auto-transfer-bot
 
 # Install dependencies
@@ -85,7 +85,7 @@ git add .
 git commit -m "Initial commit"
 
 git branch -M main
-git remote add origin https://github.com/your-github-username/gala-auto-transfer-bot.git
+git remote add origin https://github.com/ABCGala/gala-auto-transfer-bot.git
 git push -u origin main
 ```
 
