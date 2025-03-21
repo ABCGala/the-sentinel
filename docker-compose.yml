@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  gala-bot:
+    build: .
+    container_name: gala-auto-transfer-bot
+    restart: always
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/app
+    command: ["npm", "start"]
