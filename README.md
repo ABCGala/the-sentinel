@@ -95,9 +95,10 @@ git push -u origin main
 - **Use a .gitignore file** to prevent committing `.env` files.
 - **Use environment variables in deployment** to secure sensitive data.
 
-## Donate ❤️
+## **💙 Support Development**
+If you find this project useful, consider donating:
 
-If you find this bot useful, consider donating: eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e
+**Donate : eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**
 
 Developed by **ABC** 🚀
 
