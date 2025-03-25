@@ -19,7 +19,7 @@ export async function isUserRegistered(): Promise<boolean> {
 
     return Boolean(response.data?.Data?.publicKey);
   } catch (error: any) {
-    console.error("❌ User registration check failed:", error.response?.data || error.message);
+    console.error("❌ The Sentinel - User registration check failed:", error.response?.data || error.message);
     return false;
   }
 }

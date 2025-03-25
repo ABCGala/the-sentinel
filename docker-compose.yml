@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  gala-bot:
+  the-sentinel:
     build: .
-    container_name: gala-auto-transfer-bot
+    container_name: the-sentinel
     restart: always
     environment:
       - NODE_ENV=production

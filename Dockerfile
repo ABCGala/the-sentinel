@@ -4,11 +4,14 @@ FROM node:20-alpine
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Set environment to production
+ENV NODE_ENV=production
 
-# Install dependencies (including TypeScript)
-RUN npm install
+# Copy package.json first to leverage caching
+COPY package.json ./
+
+# Install only production dependencies
+RUN npm install --production
 
 # Copy the rest of the application files
 COPY . .

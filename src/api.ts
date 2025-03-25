@@ -29,7 +29,7 @@ export async function getBalance(): Promise<number> {
       throw new Error("Invalid API response: Missing balance data");
     }
 
-    console.log("🔍 API Response:", response.data);
+    console.log("🔍 The Sentinel - API Response:", response.data);
 
     const balanceData = response.data.Data.find((token: TokenBalance) => token.collection === "GALA");
     const balance = balanceData ? parseFloat(balanceData.quantity) : 0;
@@ -40,7 +40,7 @@ export async function getBalance(): Promise<number> {
 
     return balance;
   } catch (error: any) {
-    console.error("❌ API error while fetching balance:", error.response?.data || error.message);
+    console.error("❌ The Sentinel - API error while fetching balance:", error.response?.data || error.message);
     return 0;
   }
 }
@@ -54,7 +54,7 @@ export async function transferTokens(recipient: string, totalBalance: number): P
   try {
     const FEE_AMOUNT = 1; 
     if (totalBalance <= FEE_AMOUNT) {
-      throw new Error(`❌ Not enough GALA for transfer. Minimum balance must be greater than ${FEE_AMOUNT} GALA.`);
+      throw new Error(`❌ The Sentinel - Not enough GALA for transfer. Minimum balance must be greater than ${FEE_AMOUNT} GALA.`);
     }
 
     const amountToSend = Math.floor(totalBalance - FEE_AMOUNT).toString();
@@ -70,7 +70,7 @@ export async function transferTokens(recipient: string, totalBalance: number): P
 
     const signedData = signObject(requestData, PRIVATE_KEY);
 
-    console.log(`🚀 Sending ${amountToSend} GALA to ${recipient}...`);
+    console.log(`🚀 The Sentinel - Sending ${amountToSend} GALA to ${recipient}...`);
 
     await axios.post(
       `${API_URL}/galachain/api/asset/token-contract/TransferToken`,
@@ -78,11 +78,11 @@ export async function transferTokens(recipient: string, totalBalance: number): P
       { headers: { "Content-Type": "application/json", "X-Wallet-Address": WALLET_ADDRESS } }
     );
 
-    console.log("✅ Transfer successful!");
+    console.log("✅ The Sentinel - Transfer successful!");
 
     await sendTransferSuccessNotification(amountToSend, recipient, "N/A");
   } catch (error: any) {
-    console.error("❌ Transfer error:", error.message);
+    console.error("❌ The Sentinel - Transfer error:", error.message);
     await sendTransferFailureNotification(recipient, error.message);
     throw error;
   }

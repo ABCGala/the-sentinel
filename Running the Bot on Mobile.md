@@ -1,4 +1,4 @@
-# **Gala Auto-Transfer Bot**
+# **The Sentinel**
 
 Automated bot for monitoring GalaChain balances and transferring GALA tokens.
 
@@ -6,7 +6,7 @@ Automated bot for monitoring GalaChain balances and transferring GALA tokens.
 
 ## **📱 Running the Bot on Mobile (Android & iOS)**
 
-You can run the **Gala Auto-Transfer Bot** on your **mobile device** using **Termux (Android)** or by setting up a **cloud server (iOS & Android).**
+You can run the **The Sentinel** on your **mobile device** using **Termux (Android)** or by setting up a **cloud server (iOS & Android).**
 
 ---
 
@@ -31,8 +31,8 @@ pkg install git nodejs -y
 #### **📌 Step 3: Clone the Bot Repository**
 Run the following command to **download the bot’s code**:
 ```sh
-git clone https://github.com/ABCGala/gala-auto-transfer-bot.git
-cd gala-auto-transfer-bot
+git clone https://github.com/ABCGala/The-Sentinel.git
+cd The-Sentinel
 ```
 
 #### **📌 Step 4: Install Required Packages**
@@ -104,5 +104,3 @@ If you find this project useful, consider donating:
 **Donate : eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**
 
 Developed by **ABC** 🚀
-
-

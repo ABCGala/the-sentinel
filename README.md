@@ -1,8 +1,8 @@
-# Gala Auto-Transfer Bot
+# The Sentinel
 
 ## Description
 
-Gala Auto-Transfer Bot is an automated system that monitors your GalaChain wallet balance and transfers GALA tokens when a specified threshold is exceeded. The bot also provides Discord notifications for balance updates, transfers, and errors.
+The Sentinel is an automated system that monitors your GalaChain wallet balance and transfers GALA tokens when a specified threshold is exceeded. The bot also provides Discord notifications for balance updates, transfers, and errors.
 
 ## Features
 
@@ -26,8 +26,8 @@ Ensure you have the following installed:
 
 ```sh
 # Clone the repository
-git clone https://github.com/ABCGala/gala-auto-transfer-bot.git
-cd gala-auto-transfer-bot
+git clone https://github.com/ABCGala/The-Sentinel.git
+cd The-Sentinel
 
 # Install dependencies
 npm install
@@ -68,10 +68,10 @@ npm run start
 
 ```sh
 # Build the Docker image
-docker build -t gala-bot .
+docker build -t the-sentinel .
 
 # Run the container
-docker run -d --name gala-bot --env-file .env gala-bot
+docker run -d --name the-sentinel --env-file .env the-sentinel
 ```
 
 ## Deployment
@@ -85,7 +85,7 @@ git add .
 git commit -m "Initial commit"
 
 git branch -M main
-git remote add origin https://github.com/ABCGala/gala-auto-transfer-bot.git
+git remote add origin https://github.com/ABCGala/The-Sentinel.git
 git push -u origin main
 ```
 
@@ -101,4 +101,3 @@ If you find this project useful, consider donating:
 **Donate : eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**
 
 Developed by **ABC** 🚀
-

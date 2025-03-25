@@ -1,54 +1,115 @@
-import axios from "axios"; // Ensure axios is properly imported
-import { DISCORD_WEBHOOK_URL } from "./config.js"; // Import webhook URL
+import axios from "axios";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Fix __dirname issue in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ====== Environment Configuration ======
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+
+// ====== Constants from Environment ======
+const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || "";
+const API_URL = process.env.API_URL || "https://api-galaswap.gala.com";
+const WALLET_ADDRESS = process.env.WALLET_ADDRESS || "";
+const GALA_CHAIN_CHANNEL = "mainnet"; // Could be moved to .env if needed
 
 /**
- * Sends a message to Discord webhook
- * @param message - The message to send
+ * Fetches token balances from GalaChain API
  */
-export async function sendDiscordNotification(message: string): Promise<void> {
-  if (!DISCORD_WEBHOOK_URL) {
-    console.warn("⚠️ Discord Webhook URL is not set.");
-    return;
-  }
-
-  try {
-    await axios.post(DISCORD_WEBHOOK_URL, { content: message });
-    console.log("✅ Sent notification to Discord:", message);
-  } catch (error: any) {
-    console.error("❌ Failed to send Discord notification:", error.response?.data || error.message);
-  }
-}
-
-/**
- * Sends a high balance alert to Discord
- * @param balance - The current balance
- * @param walletAddress - The wallet address
- */
-export async function sendHighBalanceAlert(balance: number, walletAddress: string): Promise<void> {
-  await sendDiscordNotification(
-    `🚨 **High Balance Alert!**\n- **Current Balance:** ${balance} GALA\n- **Wallet Address:** ${walletAddress}`
-  );
-}
+const fetchBalances = async () => {
+    try {
+        const response = await axios.post(
+            `${API_URL}/galachain/api/${GALA_CHAIN_CHANNEL}/token-contract/FetchBalances`,
+            { Owner: WALLET_ADDRESS },
+            { headers: { "X-Wallet-Address": WALLET_ADDRESS } }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("❌ The Sentinel - Error fetching balances:", error.response?.data || error.message);
+        return null;
+    }
+};
 
 /**
- * Sends a transfer success notification to Discord
- * @param amount - The amount transferred
- * @param recipient - The recipient's wallet address
- * @param txId - The transaction ID
+ * Fetches token allowances from GalaChain API
  */
-export async function sendTransferSuccessNotification(amount: string, recipient: string, txId?: string): Promise<void> {
-  await sendDiscordNotification(
-    `✅ **Transfer Successful!**\n- **Amount:** ${amount} GALA\n- **Recipient:** ${recipient}` + (txId ? `\n- **Transaction ID:** ${txId}` : "")
-  );
-}
+const fetchAllowances = async () => {
+    try {
+        const response = await axios.post(
+            `${API_URL}/galachain/api/${GALA_CHAIN_CHANNEL}/token-contract/FetchAllowances`,
+            { Owner: WALLET_ADDRESS },
+            { headers: { "X-Wallet-Address": WALLET_ADDRESS } }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("❌ The Sentinel - Error fetching allowances:", error.response?.data || error.message);
+        return null;
+    }
+};
 
 /**
- * Sends a transfer failure notification to Discord
- * @param recipient - The recipient's wallet address
- * @param errorMessage - The error message
+ * Sends notification to Discord webhook
  */
-export async function sendTransferFailureNotification(recipient: string, errorMessage: string): Promise<void> {
-  await sendDiscordNotification(
-    `❌ **Transfer Failed!**\n- **Recipient:** ${recipient}\n- **Error:** ${errorMessage}`
-  );
-}
+export const sendDiscordNotification = async (message: string) => {
+    if (!DISCORD_WEBHOOK_URL) {
+        console.error("❌ The Sentinel - Discord webhook URL is missing");
+        return;
+    }
+
+    try {
+        await axios.post(DISCORD_WEBHOOK_URL, { content: message });
+        console.log("✅ The Sentinel - Notification sent to Discord.");
+    } catch (error) {
+        console.error("❌ The Sentinel - Error sending Discord notification:", error);
+    }
+};
+
+/**
+ * Sends high balance alert to Discord
+ */
+export const sendHighBalanceAlert = async (balance: number, address: string) => {
+    await sendDiscordNotification(`⚠️ **The Sentinel - High Balance Alert** ⚠️\nWallet: ${address}\nBalance: ${balance} GALA`);
+};
+
+/**
+ * Sends transfer success notification to Discord
+ */
+export const sendTransferSuccessNotification = async (amount: string, recipient: string, txHash: string) => {
+    await sendDiscordNotification(`✅ **The Sentinel - Transfer Successful**\nAmount: ${amount} GALA\nTo: ${recipient}\nTX: ${txHash}`);
+};
+
+/**
+ * Sends transfer failure notification to Discord
+ */
+export const sendTransferFailureNotification = async (recipient: string, error: string) => {
+    await sendDiscordNotification(`❌ **The Sentinel - Transfer Failed**\nTo: ${recipient}\nError: ${error}`);
+};
+
+/**
+ * Main execution function (for standalone testing)
+ */
+const main = async () => {
+    if (!WALLET_ADDRESS) {
+        console.error("❌ The Sentinel - Wallet address is missing");
+        return;
+    }
+
+    console.log("🔄 The Sentinel - Fetching GALA balance and allowances...");
+    
+    const balances = await fetchBalances();
+    const allowances = await fetchAllowances();
+
+    if (balances && allowances) {
+        const galaBalance = balances.Data.find((item: any) => item.collection === "GALA")?.quantity || "0";
+        const allowanceData = allowances.Data.length > 0 ? JSON.stringify(allowances.Data, null, 2) : "No allowances";
+
+        const message = `🔹 **The Sentinel Report**\n**GALA Balance:** ${galaBalance} GALA\n**Allowances:**\n${allowanceData}`;
+        await sendDiscordNotification(message);
+    }
+};
+
+// main(); // Uncomment for standalone testing
