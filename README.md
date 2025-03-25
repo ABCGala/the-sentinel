@@ -1,44 +1,68 @@
-# The Sentinel
+# 📌 The Sentinel: Gala Chain Balance & Transaction Monitor  
 
-## Description
+## Overview  
+The Sentinel is a **Node.js** bot developed by **ABC** that monitors your **Gala Chain wallet balance** and **transactions** in real-time. It sends **Discord notifications** when your balances change or transactions occur.  
 
-The Sentinel is an automated system that monitors your GalaChain wallet balance and transfers GALA tokens when a specified threshold is exceeded. The bot also provides Discord notifications for balance updates, transfers, and errors.
+### Features  
+✅ **Tracks Gala Chain balance** (`GALA` tokens)  
+✅ **Monitors transactions and updates** when transfers happen  
+✅ **Sends real-time alerts** to a **Discord webhook**  
+✅ **Formatted notifications** showing previous and new balances with color-coded changes  
+✅ **Supports background execution with PM2**  
 
-## Features
+---
 
-- ✅ **Automatic GALA Balance Monitoring**
-- ✅ **Auto-Transfer when balance exceeds threshold**
-- ✅ **Discord Notifications for events**
-- ✅ **Secure Transactions using cryptographic signing**
-- ✅ **Docker Support for Easy Deployment**
+## 🚀 Installation & Setup  
 
-## Installation
+### 1️⃣ Install Node.js  
+You need **Node.js** and **npm** installed to run The Sentinel.  
 
-### Prerequisites
-
-Ensure you have the following installed:
-
-- Node.js (v16 or later)
-- Docker (optional, for containerized deployment)
-- Git
-
-### Steps to Install
-
-```sh
-# Clone the repository
-git clone https://github.com/ABCGala/The-Sentinel.git
-cd The-Sentinel
-
-# Install dependencies
-npm install
-
-# Copy and configure environment variables
-cp .env.example .env
-# Edit the .env file with your wallet and API details
+#### On Linux/macOS  
+Run the following commands to install Node.js:  
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+Or using **Homebrew** on macOS:  
+```bash
+brew install node
 ```
 
-## Configuration
+#### On Windows  
+Download and install Node.js from:  
+[https://nodejs.org/en/download/](https://nodejs.org/en/download/)  
 
+To verify installation, run:  
+```bash
+node -v
+npm -v
+```
+
+---
+
+### 2️⃣ Download & Setup The Sentinel  
+You can install **The Sentinel** using any of the following methods:  
+
+#### Option 1: Clone from GitHub  
+```bash
+git clone https://github.com/ABCGala/The-Sentinel
+cd the-sentinel
+```
+
+#### Option 2: Download ZIP  
+1. Download the latest version from **GitHub**.  
+2. Extract the ZIP file and navigate to the folder.  
+
+---
+
+### 3️⃣ Install Dependencies  
+```bash
+npm install
+```
+
+---
+
+### 4️⃣ Configuration 
 Update the `.env` file with your details:
 
 ```env
@@ -51,53 +75,105 @@ RECIPIENTS=recipient-wallet-address
 CHECK_INTERVAL=30000
 DISCORD_WEBHOOK_URL=your-discord-webhook-url
 ```
+---
 
-## Running the Bot
+## ▶️ Running The Sentinel  
 
-```sh
-# Start the bot in development mode
-npm run dev
-
-# Start the bot in production mode
-npm run start
+### On Linux/macOS  
+Run the bot:  
+```bash
+npm start
+```
+To keep it running in the background:  
+```bash
+nohup npm start &  
+```
+To stop it:  
+```bash
+pkill -f "npm start"
 ```
 
-## Running with Docker
+---
 
-### Build and Run
+### On Windows  
+Run:  
+```bash
+npm start
+```
+To run in the background:  
+1. Open **Command Prompt (cmd)**  
+2. Run:  
+   ```bash
+   start /B npm start
+   ```
+3. To stop the bot, find the process:  
+   ```bash
+   tasklist | find "node"
+   ```
+   Then terminate it:  
+   ```bash
+   taskkill /F /PID <Process_ID>
+   ```
 
-```sh
-# Build the Docker image
-docker build -t the-sentinel .
+---
 
-# Run the container
-docker run -d --name the-sentinel --env-file .env the-sentinel
+## 🛠 Running The Sentinel with PM2 (Recommended for Continuous Execution)  
+
+To keep **The Sentinel** running automatically, use **PM2**:  
+
+### 1️⃣ Install PM2  
+```bash
+npm install -g pm2
 ```
 
-## Deployment
-
-### Deploying to GitHub
-
-```sh
-# Initialize a Git repository
-git init
-git add .
-git commit -m "Initial commit"
-
-git branch -M main
-git remote add origin https://github.com/ABCGala/The-Sentinel.git
-git push -u origin main
+### 2️⃣ Start The Sentinel  
+```bash
+pm start
+pm2 start npm --name The-Sentinel -- start
 ```
 
-## Security Considerations
+### 3️⃣ Check Logs & Status  
+```bash
+pm2 logs The-Sentinel
+pm2 status
+```
 
-- **Keep your PRIVATE\_KEY secret** – Never expose it publicly.
-- **Use a .gitignore file** to prevent committing `.env` files.
-- **Use environment variables in deployment** to secure sensitive data.
+### 4️⃣ Restart Automatically on Reboot  
+Run:  
+```bash
+pm2 startup
+```
+Then execute the command PM2 provides to enable auto-start.  
 
-## **💙 Support Development**
-If you find this project useful, consider donating:
+### 5️⃣ Stop or Restart The Sentinel  
+```bash
+pm2 stop The-Sentinel  # Stop the bot
+pm2 restart The-Sentinel  # Restart the bot
+pm2 delete The-Sentinel  # Remove from PM2
+```
 
-**Donate : eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**
+---
 
-Developed by **ABC** 🚀
+## 📜 Logs & Errors  
+If the bot encounters errors, they will be logged in the console.  
+To save logs to a file manually:  
+```bash
+npm start > sentinel.log 2>&1 &
+```
+
+---
+
+## 🛑 Stopping The Sentinel  
+- **Linux/macOS**: `pkill -f "npm start"`  
+- **Windows**: `taskkill /F /PID <Process_ID>`  
+- **PM2**: `pm2 stop The-Sentinel`  
+
+---
+
+## 💰 Donations  
+If you find **The Sentinel** useful, consider supporting the project:  
+**Donate: eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**  
+
+---
+
+Developed by **ABC**. Enjoy tracking your Gala Chain assets with **The Sentinel! 🚀**  
