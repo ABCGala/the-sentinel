@@ -73,8 +73,8 @@ API_URL=https://api-galaswap.gala.com
 WALLET_ADDRESS=your-wallet-address
 PRIVATE_KEY=your-private-key
 PUBLIC_KEY=your-public-key
-TRANSFER_THRESHOLD=100
-DESTINATION_WALLET=your-destination-wallet-address
+RECIPIENTS=your-destination-wallet-address
+MIN_BALANCE=100
 CHECK_INTERVAL=30000
 DISCORD_WEBHOOK_URL=your-discord-webhook-url
 ```

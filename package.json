@@ -1,26 +1,17 @@
 {
-  "name": "the-sentinel",
+  "name": "gala-auto-transfer-bot",
   "version": "1.0.0",
-  "description": "🛡️ The Sentinel - Automated GALA Token Security System for GalaChain",
+  "description": "Automated GALA transfer bot for GalaChain.",
   "main": "src/bot_main.ts",
   "type": "module",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
     "start": "tsx src/bot_main.ts",
     "dev": "tsx watch src/bot_main.ts",
     "lint": "eslint . --ext .ts",
-    "format": "prettier --write .",
-    "test": "vitest run",
-    "security-check": "npm audit --production"
+    "format": "prettier --write ."
   },
-  "keywords": [
-    "gala",
-    "blockchain",
-    "security",
-    "monitoring",
-    "sentinel"
-  ],
   "dependencies": {
     "axios": "^1.8.3",
     "dotenv": "^16.4.7",
@@ -32,17 +23,10 @@
   "devDependencies": {
     "@types/elliptic": "^6.4.18",
     "@types/node": "^20.17.24",
-    "@types/uuid": "^10.0.0",
-    "eslint": "^8.50.0",
-    "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.1.0",
-    "rimraf": "^6.0.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
-    "vitest": "^1.4.0"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "eslint": "^8.50.0",
+    "prettier": "^3.1.0",
+    "eslint-config-prettier": "^9.0.0"
   }
 }

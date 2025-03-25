@@ -1,8 +1,12 @@
 import axios from "axios";
-import { signObject, generateUniqueKey } from "./utils.js";
-import { WALLET_ADDRESS, PRIVATE_KEY, PUBLIC_KEY, API_URL } from "./config.js";
-import { FetchBalancesResponse, TokenBalance } from "./types.js";
-import { sendHighBalanceAlert, sendTransferSuccessNotification, sendTransferFailureNotification } from "./discord.js";
+import { signObject, generateUniqueKey } from "./utils";
+import { WALLET_ADDRESS, PRIVATE_KEY, PUBLIC_KEY, API_URL } from "./config";
+import { FetchBalancesResponse, TokenBalance } from "./types";
+import {
+  sendHighBalanceAlert,
+  sendTransferSuccessNotification,
+  sendTransferFailureNotification,
+} from "./discord"; 
 
 /**
  * Fetches the GALA balance from GalaChain.
@@ -29,18 +33,18 @@ export async function getBalance(): Promise<number> {
       throw new Error("Invalid API response: Missing balance data");
     }
 
-    console.log("🔍 The Sentinel - API Response:", response.data);
+    console.log("🔍 API Response:", response.data);
 
     const balanceData = response.data.Data.find((token: TokenBalance) => token.collection === "GALA");
     const balance = balanceData ? parseFloat(balanceData.quantity) : 0;
 
-    if (balance > 100) {
+    if (balance > 80) {
       await sendHighBalanceAlert(balance, WALLET_ADDRESS);
     }
 
     return balance;
   } catch (error: any) {
-    console.error("❌ The Sentinel - API error while fetching balance:", error.response?.data || error.message);
+    console.error("❌ API error while fetching balance:", error.response?.data || error.message);
     return 0;
   }
 }
@@ -54,7 +58,7 @@ export async function transferTokens(recipient: string, totalBalance: number): P
   try {
     const FEE_AMOUNT = 1; 
     if (totalBalance <= FEE_AMOUNT) {
-      throw new Error(`❌ The Sentinel - Not enough GALA for transfer. Minimum balance must be greater than ${FEE_AMOUNT} GALA.`);
+      throw new Error(`❌ Not enough GALA for transfer. Minimum balance must be greater than ${FEE_AMOUNT} GALA.`);
     }
 
     const amountToSend = Math.floor(totalBalance - FEE_AMOUNT).toString();
@@ -70,7 +74,7 @@ export async function transferTokens(recipient: string, totalBalance: number): P
 
     const signedData = signObject(requestData, PRIVATE_KEY);
 
-    console.log(`🚀 The Sentinel - Sending ${amountToSend} GALA to ${recipient}...`);
+    console.log(`🚀 The Sentinel is sending ${amountToSend} GALA to ${recipient}...`);
 
     await axios.post(
       `${API_URL}/galachain/api/asset/token-contract/TransferToken`,
@@ -78,11 +82,11 @@ export async function transferTokens(recipient: string, totalBalance: number): P
       { headers: { "Content-Type": "application/json", "X-Wallet-Address": WALLET_ADDRESS } }
     );
 
-    console.log("✅ The Sentinel - Transfer successful!");
+    console.log("✅ Transfer successful!");
 
     await sendTransferSuccessNotification(amountToSend, recipient, "N/A");
   } catch (error: any) {
-    console.error("❌ The Sentinel - Transfer error:", error.message);
+    console.error("❌ Transfer error in The Sentinel:", error.message);
     await sendTransferFailureNotification(recipient, error.message);
     throw error;
   }
