@@ -22,7 +22,8 @@ Ensure you have the following installed:
 - Docker (optional, for containerized deployment)
 - Git
 - ```sh
-- sudo apt update
+#  
+ sudo apt update
 sudo apt upgrade
 sudo apt install curl
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
