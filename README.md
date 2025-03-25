@@ -21,6 +21,12 @@ Ensure you have the following installed:
 - Node.js (v16 or later)
 - Docker (optional, for containerized deployment)
 - Git
+- ```sh
+- sudo apt update
+sudo apt upgrade
+sudo apt install curl
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
 
 ### Steps to Install
 
