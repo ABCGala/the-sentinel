@@ -1,16 +1,16 @@
-# 📌 The Sentinel: Gala Chain Balance & Transaction Monitor  
+# 📌 The Sentinel: Gala Chain Wallet Guardian  
 
 ## Overview  
-The Sentinel is a **Node.js** bot developed by **ABC** that monitors your **Gala Chain wallet balance** and **transactions** in real-time. It sends **Discord notifications** when your balances change or transactions occur.  
+The Sentinel is a **Node.js** bot developed by **ABC** that acts as a **guardian for your Gala Chain wallet**. It continuously monitors your **GALA token balance** and **automatically transfers excess funds** to a designated wallet.  
 
 ### Features  
-✅ **Tracks Gala Chain balance** (`GALA` tokens)  
-✅ **Monitors transactions and updates** when transfers happen  
-✅ **Sends real-time alerts** to a **Discord webhook**  
-✅ **Formatted notifications** showing previous and new balances with color-coded changes  
+✅ **Monitors wallet balance in real-time**  
+✅ **Automatically transfers GALA if balance exceeds 100**  
+✅ **Detects when GALA is minted and moves it to a secure wallet**  
+✅ **Sends notifications via Discord webhook**  
 ✅ **Supports background execution with PM2**  
 
----
+---  
 
 ## 🚀 Installation & Setup  
 
@@ -41,7 +41,7 @@ node -v
 npm -v
 ```
 
----
+---  
 
 ### 2️⃣ Download & Setup The Sentinel  
 You can install **The Sentinel** using any of the following methods:  
@@ -56,16 +56,16 @@ cd the-sentinel
 1. Download the latest version from **GitHub**.  
 2. Extract the ZIP file and navigate to the folder.  
 
----
+---  
 
 ### 3️⃣ Install Dependencies  
 ```bash
 npm install
 ```
 
----
+---  
 
-### 4️⃣ Configuration 
+### 4️⃣ Configuration  
 Update the `.env` file with your details:
 
 ```env
@@ -73,12 +73,12 @@ API_URL=https://api-galaswap.gala.com
 WALLET_ADDRESS=your-wallet-address
 PRIVATE_KEY=your-private-key
 PUBLIC_KEY=your-public-key
-MIN_BALANCE=100
-RECIPIENTS=recipient-wallet-address
+TRANSFER_THRESHOLD=100
+DESTINATION_WALLET=your-destination-wallet-address
 CHECK_INTERVAL=30000
 DISCORD_WEBHOOK_URL=your-discord-webhook-url
 ```
----
+---  
 
 ## ▶️ Running The Sentinel  
 
@@ -96,7 +96,7 @@ To stop it:
 pkill -f "npm start"
 ```
 
----
+---  
 
 ### On Windows  
 Run:  
@@ -118,7 +118,7 @@ To run in the background:
    taskkill /F /PID <Process_ID>
    ```
 
----
+---  
 
 ## 🛠 Running The Sentinel with PM2 (Recommended for Continuous Execution)  
 
@@ -131,7 +131,6 @@ npm install -g pm2
 
 ### 2️⃣ Start The Sentinel  
 ```bash
-pm start
 pm2 start npm --name The-Sentinel -- start
 ```
 
@@ -155,28 +154,29 @@ pm2 restart The-Sentinel  # Restart the bot
 pm2 delete The-Sentinel  # Remove from PM2
 ```
 
----
+---  
 
-## 📜 Logs & Errors  
+## 🐝 Logs & Errors  
 If the bot encounters errors, they will be logged in the console.  
 To save logs to a file manually:  
 ```bash
 npm start > sentinel.log 2>&1 &
 ```
 
----
+---  
 
-## 🛑 Stopping The Sentinel  
+## 🚫 Stopping The Sentinel  
 - **Linux/macOS**: `pkill -f "npm start"`  
 - **Windows**: `taskkill /F /PID <Process_ID>`  
 - **PM2**: `pm2 stop The-Sentinel`  
 
----
+---  
 
 ## 💰 Donations  
 If you find **The Sentinel** useful, consider supporting the project:  
-**Donate: eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**  
+**Donate: galachain|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**  
 
----
+---  
 
-Developed by **ABC**. Enjoy tracking your Gala Chain assets with **The Sentinel! 🚀**  
+Developed by **ABC**. Enjoy tracking and securing your Gala Chain assets with **The Sentinel! 🚀**
+
