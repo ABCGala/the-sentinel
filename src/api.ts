@@ -1,6 +1,6 @@
 import axios from "axios";
 import { signObject, generateUniqueKey } from "./utils";
-import { WALLET_ADDRESS, PRIVATE_KEY, PUBLIC_KEY, API_URL } from "./config";
+import { WALLET_ADDRESS, PRIVATE_KEY, PUBLIC_KEY, API_URL, MIN_BALANCE } from "./config";
 import { FetchBalancesResponse, TokenBalance } from "./types";
 import {
   sendHighBalanceAlert,
@@ -38,7 +38,7 @@ export async function getBalance(): Promise<number> {
     const balanceData = response.data.Data.find((token: TokenBalance) => token.collection === "GALA");
     const balance = balanceData ? parseFloat(balanceData.quantity) : 0;
 
-    if (balance > 80) {
+    if (balance > MIN_BALANCE) {
       await sendHighBalanceAlert(balance, WALLET_ADDRESS);
     }
 
