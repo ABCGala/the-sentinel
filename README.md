@@ -174,7 +174,7 @@ npm start > sentinel.log 2>&1 &
 
 ## 💰 Donations  
 If you find **The Sentinel** useful, consider supporting the project:  
-**Donate: galachain|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**  
+**Donate: eth|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e**  
 
 ---  
 
