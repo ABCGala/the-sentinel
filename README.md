@@ -48,7 +48,7 @@ You can install **The Sentinel** using any of the following methods:
 
 #### Option 1: Clone from GitHub  
 ```bash
-git clone https://github.com/ABCGala/The-Sentinel
+git clone https://github.com/ABCWeb3/the-sentinel
 cd The-Sentinel
 ```
 
