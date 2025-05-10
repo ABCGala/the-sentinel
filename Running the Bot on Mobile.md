@@ -49,11 +49,13 @@ nano .env
 Paste the following (replace with your real details):
 ```
 API_URL=https://api-galaswap.gala.com
-WALLET_ADDRESS=galachain|8C1C40a9df32D7460cb387FBf6Ede6cD9Ec5689e
+WALLET_ADDRESS=your-wallet-address
 PRIVATE_KEY=your-private-key
-DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/your-webhook
+PUBLIC_KEY=your-public-key
+RECIPIENTS=your-destination-wallet-address
 MIN_BALANCE=100
 CHECK_INTERVAL=30000
+DISCORD_WEBHOOK_URL=your-discord-webhook-url
 ```
 To save in **nano**, press `CTRL + X`, then `Y`, then `Enter`.
 
